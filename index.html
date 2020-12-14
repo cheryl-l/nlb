@@ -2,15 +2,15 @@
 <head>
 
 <title>
-    spacesheep
+    Libraries
 </title>
 <!--webpage name-->
-<link rel = "icon" href = "assets/logob.png">
+<!-- <link rel = "icon" href = "assets/logob.png"> -->
 <!--webpage icon-->
 
-<link href='https://fonts.googleapis.com/css?family=Titillium Web' rel='stylesheet'>
+<link href="https://fonts.googleapis.com/css?family=Titillium Web" rel="stylesheet">
 <link rel = "stylesheet" type = "text/css" href = "style.css">
-<script src = "main.js"> </script>
+<!-- <script src = "main.js"> </script> -->
 <!--link CSS to html-->
 </head>
 
@@ -20,7 +20,7 @@
    <div class = "navigation-bar-right">
   <a href="#cubesat">CubeSat</a>
   <a href="#space-technology">Space Technology</a>
-  <a href="about.html">About</a>
+  <a href="details.html">Details</a>
   <button id = "switch" onclick="toggleTheme()">  </button>
   </div>
 </div>
@@ -35,78 +35,83 @@
 </div>
 
 
-<div class = "article-list" id = "cubesat" >
-    <h2> CubeSat </h2>
 
-<div class = "tiles">
-     <div class = "tile">
-        <a href="articles/introduction-to-cubesat.html">
-             <img src = "assets/thumbnails/038.png" alt="image of cubesat">
-        <h3> Introduction to CubeSat </h3>
-        </a>
-    </div>
-     <div class = "tile">
-        <a href="articles/applications-of-cubesat.html">
-             <img src = "assets/thumbnails/009.jpg" alt="earth from space">
-        <h3> Applications of CubeSat </h3>
-        </a>
-    </div>
 
-    <div class = "tile">
-        <a href="articles/future-of-cubesat.html">
-             <img src = "assets/thumbnails/017.jpg" alt="coloured earth with satellite">
-        <h3> Future of CubeSats </h3>
-        </a>
-    </div>
+<div class = "tiled-list">
+    <h2> Libraries </h2>
 
-    <div class = "tile">
-        <a href="articles/notable-cubesats-in-history.html">
-             <img src = "assets/thumbnails/039.png" alt="image of cubesat">
-        <h3> Notable CubeSats in history </h3>
+<div class = "tiles" id = "tiles">
+<!--      <div class = "tile" id = "tile">
+        <a id = "pagelink">
+             <img src = "https://www.nlb.gov.sg/Portals/0/library/gallery/AngMoKio/MAIN-PICTURE-of-AMPL-cropped.jpg" alt="testing" id = "thumbnail">
+        <h3 id = "name"> Introduction to CubeSat </h3>
         </a>
-    </div>
-</div>
-</div> <!--end of cubesat-->
-
-<div class = "article-list" id = "space-technology" >
-    <h2> Space Technology </h2>
-
-<div class = "tiles">
-     <div class = "tile">
-        <a href="articles/what-are-artificial-satellites.html">
-             <img src = "assets/thumbnails/001.jpg" alt="image of satellite with earth">
-        <h3> What are Artificial Satellites? </h3>
-        </a>
-    </div>
-     <div class = "tile">
-        <a href="articles/types-of-satellites.html">
-             <img src = "assets/thumbnails/011.jpg" alt="image of satellite">
-        <h3> Types of Satellites </h3>
-        </a>
-    </div>
-    <div class = "tile">
-        <a href="articles/space-stations.html">
-             <img src = "assets/thumbnails/040.jpg" alt="image of international space station">
-        <h3> Space Stations </h3>
-        </a>
-    </div>
-
-    <div class = "tile">
-        <a href="articles/spacecrafts.html">
-             <img src = "assets/thumbnails/007.jpg" alt="image of take off">
-        <h3> Spacecrafts </h3>
-        </a>
-    </div>
-
+    </div> -->
 </div>
 </div>
 
 
+<script>
+window.addEventListener("load", function() {
+		getRows();
+	});
+
+function getRows() {
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.open("get", "libraries.xml", true);
+		xmlhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				showResult(this);
+			}
+		};
+		xmlhttp.send();
+  }
+
+function showResult(xmlhttp){
+  var xmlDoc = xmlhttp.responseXML.documentElement;
+	removeWhitespace(xmlDoc);
+  var library = xmlDoc.getElementsByTagName("item");
+
+  for (var i = 0; i < library.length; i++) {
+    console.log(library[i].childNodes[0].childNodes[0].nodeValue);
+    var tile = document.createElement("tile");
+    var name = document.createElement("h3");
+    var thumbnail = document.createElement("img");
+    var pagelink = document.createElement("a");
+    name.innerHTML = library[i].childNodes[0].childNodes[0].nodeValue;
+    thumbnail.src = library[i].childNodes[4].childNodes[0].nodeValue;
+    pagelink.href = "https://www.youtube.com"; //can replace with some link + branch code
+    pagelink.appendChild(thumbnail);
+    pagelink.appendChild(name);
+    tile.appendChild(pagelink);
+    tile.className = "tile";
+    document.getElementById("tiles").appendChild(tile);
+  }
+
+
+}
+
+function removeWhitespace(xml) {
+	var loopIndex;
+	for (loopIndex = 0; loopIndex < xml.childNodes.length; loopIndex++)
+	{
+		var currentNode = xml.childNodes[loopIndex];
+		if (currentNode.nodeType == 1)
+		{
+			removeWhitespace(currentNode);
+		}
+		if (!(/\S/.test(currentNode.nodeValue)) && (currentNode.nodeType == 3))
+		{
+			xml.removeChild(xml.childNodes[loopIndex--]);
+		}
+	}
+}
+</script>
 
 
 
 <div class = "footer">
-    <a href="https://www.dsta.gov.sg/spacecube" style = "padding: 0 20 0 5"><img src = "assets/spacecube.png" alt="" style="float:left;width:auto;height:7.5vh; margin-top:0.25vh; margin-right: 20px"> SpaceCube Mission </a>
+<!--     <a href="https://www.dsta.gov.sg/spacecube" style = "padding: 0 20 0 5"><img src = "assets/spacecube.png" alt="" style="float:left;width:auto;height:7.5vh; margin-top:0.25vh; margin-right: 20px"> SpaceCube Mission </a> -->
     <div class = "footer-right">
         <a href="#">Back to Top</a>
     </div>

@@ -173,6 +173,47 @@ a:hover, a:active {
 
 
 
+.landing-image {
+  /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("assets/satellite.jpeg");
+  margin-top:0px;
+  /* Set a specific height */
+  height: 50%;
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+  overflow: scroll;
+}
+
+.landing-text {
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1em;
+}
+
+.landing-text button {
+    background-color: var(--sc);
+    height: 50%;
+    color: var(--tsc);
+    width: max(300px, 30vw);
+    font-size: 1em;
+    padding: 15px 30px;
+    /*height: max(50px, 5vh);*/
+    border-radius: 10px;
+    border: 2px solid var(--ac2);
+}
+
+.landing-text button:hover {
+    background-color: var(--ac1);
+    color: var(--tac1);
+}
+
 
 
 .tiles {
@@ -204,16 +245,16 @@ a:hover, a:active {
 
 
 
-.article-list {
+.tiled-list {
     padding: 60px;
 }
 
-.article-list h2 {
+.tiled-list h2 {
     color: var(--tdc);
     font-size: 3vw;
 }
 
-.article-list h3 {
+.tiled-list h3 {
     /*color: var(--tdc);*/
     /*text-decoration: none;*/
     font-size: 2vw;
@@ -221,7 +262,7 @@ a:hover, a:active {
 
 @media only screen and (max-width: 800px) {
     .tile { width: 45%;}
-    .article-list { padding: 8vw;}
+    .tiled-list { padding: 8vw;}
 
 
 }
